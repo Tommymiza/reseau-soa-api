@@ -8,19 +8,42 @@ datasource db {
 }
 
 model User {
-    id        Int     @id @default(autoincrement())
-    email     String  @unique
-    password  String
-    nom       String
-    prenom    String
-    telephone String
-    opr_id    Int?
-    Opr       OPR?    @relation(fields: [opr_id], references: [id])
-    isActive  Boolean @default(true)
-    role      Role    @default(USER)
+    id          Int           @id @default(autoincrement())
+    email       String        @unique
+    password    String
+    nom         String
+    prenom      String
+    telephone   String
+    opr_id      Int?
+    Opr         OPR?          @relation(fields: [opr_id], references: [id])
+    isActive    Boolean       @default(true)
+    role        Role          @default(USER)
+    Permissions Permissions[]
 }
 
 enum Role {
     ADMIN
     USER
+}
+
+enum TypePermission {
+    C
+    R
+    U
+    D
+}
+
+model Permissions {
+    id            Int            @id @default(autoincrement())
+    user_id       Int
+    permission_id Int
+    type          TypePermission
+    User          User           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    Permission    Permission     @relation(fields: [permission_id], references: [id], onDelete: Restrict)
+}
+
+model Permission {
+    id          Int           @id @default(autoincrement())
+    nom         String        @unique
+    Permissions Permissions[]
 }

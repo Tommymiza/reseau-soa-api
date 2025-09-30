@@ -5,6 +5,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -36,9 +37,10 @@ export class CreateUserDto {
 
   @ApiPropertyOptional()
   @IsNumber()
+  @IsOptional()
   opr_id?: number;
 
-  @ApiPropertyOptional()
+  @ApiProperty()
   @IsEnum(Role)
-  role?: Role;
+  role: Role;
 }

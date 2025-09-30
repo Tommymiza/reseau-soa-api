@@ -53,7 +53,6 @@ model TypeAccompagnementTech {
 model AccompagnementOpr {
     id                      Int                  @id @default(autoincrement())
     date                    DateTime
-    ancien_id               Int
     duree                   Int?
     existant                String?
     problematique           String?

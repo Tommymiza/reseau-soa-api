@@ -46,13 +46,20 @@ export class UserService {
 
   async update(id: number, updateUserDto: Prisma.UserUncheckedUpdateInput) {
     try {
+      const hashedPassword = updateUserDto.password
+        ? hashSync(updateUserDto.password as string, 10)
+        : undefined;
       const user = await this.prisma.user.update({
         where: { id },
-        data: updateUserDto,
+        data: {
+          ...updateUserDto,
+          password: hashedPassword,
+        },
       });
       delete user.password;
       return user;
     } catch (error) {
+      console.log(error);
       throw new InternalServerErrorException(error.message);
     }
   }
@@ -65,6 +72,7 @@ export class UserService {
       delete user.password;
       return user;
     } catch (error) {
+      console.log(error);
       throw new InternalServerErrorException(error.message);
     }
   }

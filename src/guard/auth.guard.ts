@@ -32,6 +32,14 @@ export class AuthGuard implements CanActivate {
       const payload: { id: number; role: Role } = this.jwt.decode(token);
       const user = await this.prisma.user.findUniqueOrThrow({
         where: { id: payload.id },
+        include: {
+          Opr: true,
+          Permissions: {
+            include: {
+              Permission: true,
+            },
+          },
+        },
       });
       req.jwtToken = token;
       delete user.password;
