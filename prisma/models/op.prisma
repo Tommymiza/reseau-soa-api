@@ -51,39 +51,32 @@ model TypeAccompagnementTech {
 }
 
 model AccompagnementOpr {
-    id                      Int                  @id @default(autoincrement())
-    date                    DateTime
-    duree                   Int?
-    existant                String?
-    problematique           String?
-    solution                String?
-    remarque                String?
-    id_theme_accompagnement Int?
-    ThemeAccompagnement     ThemeAccompagnement? @relation(fields: [id_theme_accompagnement], references: [id])
-    id_opr                  Int
-    OPR                     OPR                  @relation(fields: [id_opr], references: [id])
-    AccompagnementProd      AccompagnementProd[]
+    id                          Int                         @id @default(autoincrement())
+    date                        DateTime
+    duree                       Int?
+    theme                       String
+    existant                    String?
+    problematique               String?
+    solution                    String?
+    remarque                    String?
+    type                        TypeAccompagnement
+    id_category_theme           Int
+    id_opr                      Int
+    OPR                         OPR                         @relation(fields: [id_opr], references: [id])
+    CategoryThemeAccompagnement CategoryThemeAccompagnement @relation(fields: [id_category_theme], references: [id])
+    AccompagnementProd          AccompagnementProd[]
 }
 
 model CategoryThemeAccompagnement {
-    id                  Int                   @id @default(autoincrement())
-    nom                 String
-    type                TypeAccompagnement
-    ThemeAccompagnement ThemeAccompagnement[]
-}
-
-model ThemeAccompagnement {
-    id                               Int                         @id @default(autoincrement())
-    nom                              String
-    id_category_theme_accompagnement Int
-    CategoryThemeAccompagnement      CategoryThemeAccompagnement @relation(fields: [id_category_theme_accompagnement], references: [id])
-    AccompagnementOpr                AccompagnementOpr[]
+    id                Int                 @id @default(autoincrement())
+    nom               String
+    AccompagnementOpr AccompagnementOpr[]
 }
 
 enum TypeAccompagnement {
-    Accompagnement
-    VE
-    Formation
+    ACCOMPAGNEMENT_SUIVI
+    VISITE_ECHANGE
+    FORMATION
 }
 
 model InformationAgricole {

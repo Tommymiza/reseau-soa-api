@@ -1,23 +1,32 @@
 model Jeune {
-    id                     Int          @id @default(autoincrement())
-    date                   DateTime
-    accompagnement_op      String?
-    accompagnement_parrain String?
-    id_producteur          Int
-    Producteur             Producteur   @relation(fields: [id_producteur], references: [id], name: "JeuneProducteur")
-    id_parrain             Int?
-    Parrain                Producteur?  @relation(fields: [id_parrain], references: [id], name: "JeuneParrain")
-    SuiviJeune             SuiviJeune[]
-    Revolving              Revolving[]
-    Relaye                 Relaye[]
+    id                 Int          @id @default(autoincrement())
+    date               DateTime
+    id_producteur      Int
+    Producteur         Producteur   @relation(fields: [id_producteur], references: [id], name: "JeuneProducteur")
+    id_parrain         Int?
+    Parrain            Producteur?  @relation(fields: [id_parrain], references: [id], name: "JeuneParrain")
+    titre_projet       String?
+    montant_apport     Float?
+    montant_subvention Float?
+    id_speculation     Int?
+    Speculation        Speculation? @relation(fields: [id_speculation], references: [id])
+    SuiviJeune         SuiviJeune[]
+    Revolving          Revolving[]
+    Relaye             Relaye[]
 }
 
 model SuiviJeune {
-    id          Int      @id @default(autoincrement())
-    date        DateTime
-    id_jeune    Int
-    Jeune       Jeune    @relation(fields: [id_jeune], references: [id])
-    deroulement String
+    id                  Int                 @id @default(autoincrement())
+    date                DateTime
+    id_jeune            Int
+    Jeune               Jeune               @relation(fields: [id_jeune], references: [id])
+    deroulement         String
+    type_accompagnateur TypeAccompagnateur?
+}
+
+enum TypeAccompagnateur {
+    Technicien
+    Parrain
 }
 
 model Revolving {

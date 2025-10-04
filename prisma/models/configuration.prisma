@@ -5,6 +5,7 @@ model Speculation {
     Production       Production[]
     Semence          Semence[]
     VenteSpeculation VenteSpeculation[]
+    Jeune            Jeune[]
 }
 
 enum TypeSpeculation {

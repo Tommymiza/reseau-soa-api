@@ -80,7 +80,9 @@ model AccompagnementProd {
     id_producteur          Int
     Producteur             Producteur        @relation(fields: [id_producteur], references: [id])
     id_type_accompagnement Int
-    AccompagnementOpr      AccompagnementOpr @relation(fields: [id_type_accompagnement], references: [id])
+    AccompagnementOpr      AccompagnementOpr @relation(fields: [id_type_accompagnement], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    @@unique([id_producteur, id_type_accompagnement])
 }
 
 model SanteAnimale {
