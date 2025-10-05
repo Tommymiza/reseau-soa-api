@@ -33,6 +33,7 @@ model Producteur {
     Jeune                  Jeune[]              @relation(name: "JeuneProducteur")
     JeuneParrain           Jeune[]              @relation(name: "JeuneParrain")
     GVECFinCycle           GVECFinCycle[]
+    RepresentationProd     RepresentationProd[]
 }
 
 enum Sexe {

@@ -11,6 +11,7 @@ import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryThemeModule } from './categoryTheme/categoryTheme.module';
+import { CommercialisationModule } from './commercialisation/commercialisation.module';
 import { AuthGuard } from './guard/auth.guard';
 import { GvecModule } from './gvec/gvec.module';
 import { GvecCycleModule } from './gvecCycle/gvecCycle.module';
@@ -24,9 +25,13 @@ import { OprModule } from './opr/opr.module';
 import { PermissionModule } from './permission/permission.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProducteurModule } from './producteur/producteur.module';
+import { RepresentationModule } from './representation/representation.module';
+import { RepresentationProdModule } from './representationProd/representationProd.module';
+import { SanteAnimaleModule } from './santeAnimale/santeAnimale.module';
 import { SpeculationModule } from './speculation/speculation.module';
 import { SuiviJeuneModule } from './suiviJeune/suiviJeune.module';
 import { UserModule } from './user/user.module';
+import { VenteSpeculationModule } from './venteSpeculation/venteSpeculation.module';
 
 @Module({
   imports: [
@@ -46,6 +51,7 @@ import { UserModule } from './user/user.module';
     AchatModule,
     AchatArticleModule,
     ArticleModule,
+    CommercialisationModule,
     GvecModule,
     GvecCycleModule,
     GvecRealisationModule,
@@ -57,9 +63,13 @@ import { UserModule } from './user/user.module';
     OprModule,
     PermissionModule,
     ProducteurModule,
+    RepresentationModule,
+    RepresentationProdModule,
+    SanteAnimaleModule,
     SpeculationModule,
     SuiviJeuneModule,
     UserModule,
+    VenteSpeculationModule,
   ],
   controllers: [AppController],
   providers: [

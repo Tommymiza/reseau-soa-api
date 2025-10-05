@@ -19,6 +19,7 @@ model OPR {
     Environnementale       Environnementale[]
     SanteAnimale           SanteAnimale[]
     User                   User[]
+    Representation         Representation[]
 }
 
 model OPB {
@@ -165,4 +166,28 @@ model Environnementale {
 enum TypeEnvironnementale {
     Pepiniere
     Plantation
+}
+
+model Representation {
+    id                 Int                  @id @default(autoincrement())
+    date               DateTime
+    duree              Int?
+    theme              String
+    problematique      String?
+    positionnement     String?
+    resultat           String?
+    suite_a_donner     String?
+    id_opr             Int
+    OPR                OPR                  @relation(fields: [id_opr], references: [id])
+    RepresentationProd RepresentationProd[]
+}
+
+model RepresentationProd {
+    id                Int            @id @default(autoincrement())
+    id_producteur     Int
+    Producteur        Producteur     @relation(fields: [id_producteur], references: [id])
+    id_representation Int
+    Representation    Representation @relation(fields: [id_representation], references: [id])
+
+    @@unique([id_producteur, id_representation])
 }
