@@ -1,0 +1,62 @@
+model GVEC {
+    id              Int          @id @default(autoincrement())
+    nom             String
+    date            DateTime
+    id_localisation Int
+    Localisation    Localisation @relation(fields: [id_localisation], references: [id])
+    GVECCycle       GVECCycle[]
+}
+
+model GVECCycle {
+    id                 Int               @id @default(autoincrement())
+    numero             Int
+    date_debut         DateTime
+    date_fin           DateTime
+    montant_part       Float
+    montant_cotisation Float
+    id_gvec            Int
+    gvec               GVEC              @relation(fields: [id_gvec], references: [id])
+    GVECRealisation    GVECRealisation[]
+    GVECFinCycle       GVECFinCycle[]
+}
+
+model GVECRealisation {
+    id                   Int       @id @default(autoincrement())
+    numero               Int
+    date                 DateTime
+    total_famangina      Float
+    nb_novangina         Int
+    total_caisse_sociale Float
+    total_remboursement  Float
+    total_interet        Float
+    nb_remboursant       Int
+    total_credit         Float
+    nb_octroye           Int
+    total_caisse_epargne Float
+    id_gvec_cycle        Int
+    gvec_cycle           GVECCycle @relation(fields: [id_gvec_cycle], references: [id])
+}
+
+model GVECFinCycle {
+    id              Int          @id @default(autoincrement())
+    id_producteur   Int
+    fonction        GVECFonction
+    nb_part         Int
+    montant_part    Float
+    montant_interet Float
+    montant_total   Float
+    Producteur      Producteur   @relation(fields: [id_producteur], references: [id])
+    id_gvec_cycle   Int
+    gvec_cycle      GVECCycle    @relation(fields: [id_gvec_cycle], references: [id])
+
+    @@unique([id_producteur, id_gvec_cycle])
+}
+
+enum GVECFonction {
+    FILOHA
+    SEKRETERA
+    TRESORIER
+    MPANISA_VOLA_1
+    MPANISA_VOLA_2
+    MPIKAMBANA
+}

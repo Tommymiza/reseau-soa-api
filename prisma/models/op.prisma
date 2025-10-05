@@ -59,6 +59,10 @@ model AccompagnementOpr {
     problematique               String?
     solution                    String?
     remarque                    String?
+    activite_de_masse           Boolean                     @default(false)
+    nb_hommes                   Int?
+    nb_femmes                   Int?
+    nb_jeunes                   Int?
     type                        TypeAccompagnement
     id_category_theme           Int
     id_opr                      Int
@@ -77,6 +81,7 @@ enum TypeAccompagnement {
     ACCOMPAGNEMENT_SUIVI
     VISITE_ECHANGE
     FORMATION
+    ANIMATION_SENSIBILISATION
 }
 
 model InformationAgricole {

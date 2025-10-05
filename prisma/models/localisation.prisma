@@ -39,4 +39,5 @@ model Localisation {
     OPB          OPB[]
     Producteur   Producteur[]
     OPR          OPR[]
+    GVEC         GVEC[]
 }

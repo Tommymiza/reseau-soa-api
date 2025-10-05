@@ -32,6 +32,7 @@ model Producteur {
     SuiviEvaluation        SuiviEvaluation[]
     Jeune                  Jeune[]              @relation(name: "JeuneProducteur")
     JeuneParrain           Jeune[]              @relation(name: "JeuneParrain")
+    GVECFinCycle           GVECFinCycle[]
 }
 
 enum Sexe {

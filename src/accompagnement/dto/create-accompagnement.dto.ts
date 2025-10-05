@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { TypeAccompagnement } from '@prisma/client';
 import {
+  IsBoolean,
   IsDateString,
   IsEnum,
   IsInt,
@@ -49,8 +50,41 @@ export class CreateAccompagnementOprDto {
   remarque?: string;
 
   @ApiProperty({
+    description: "S'agit-il d'une activité de masse",
+    required: false,
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  activite_de_masse?: boolean;
+
+  @ApiProperty({
+    description: "Nombre d'hommes participants",
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  nb_hommes?: number;
+
+  @ApiProperty({
+    description: 'Nombre de femmes participantes',
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  nb_femmes?: number;
+
+  @ApiProperty({
+    description: 'Nombre de jeunes participants',
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  nb_jeunes?: number;
+
+  @ApiProperty({
     description:
-      "Type d'accompagnement (ACCOMPAGNEMENT_SUIVI, VISITE_ECHANGE, FORMATION)",
+      "Type d'accompagnement (ACCOMPAGNEMENT_SUIVI, VISITE_ECHANGE, FORMATION, ANIMATION_SENSIBILISATION)",
     enum: TypeAccompagnement,
   })
   @IsNotEmpty()
