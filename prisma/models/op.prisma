@@ -20,6 +20,7 @@ model OPR {
     SanteAnimale           SanteAnimale[]
     User                   User[]
     Representation         Representation[]
+    GVEC                   GVEC[]
 }
 
 model OPB {

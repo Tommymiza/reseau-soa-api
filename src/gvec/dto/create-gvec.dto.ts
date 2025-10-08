@@ -18,4 +18,10 @@ export class CreateGvecDto {
   @Type(() => Number)
   @IsInt()
   id_localisation: number;
+
+  @ApiProperty({ description: "Identifiant de l'OPR" })
+  @IsNotEmpty()
+  @Type(() => Number)
+  @IsInt()
+  id_opr: number;
 }

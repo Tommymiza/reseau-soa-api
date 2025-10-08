@@ -2,6 +2,8 @@ model GVEC {
     id              Int          @id @default(autoincrement())
     nom             String
     date            DateTime
+    id_opr          Int
+    OPR             OPR          @relation(fields: [id_opr], references: [id], onDelete: Restrict, onUpdate: Cascade)
     id_localisation Int
     Localisation    Localisation @relation(fields: [id_localisation], references: [id])
     GVECCycle       GVECCycle[]
@@ -15,7 +17,7 @@ model GVECCycle {
     montant_part       Float
     montant_cotisation Float
     id_gvec            Int
-    gvec               GVEC              @relation(fields: [id_gvec], references: [id])
+    gvec               GVEC              @relation(fields: [id_gvec], references: [id], onDelete: Cascade, onUpdate: Cascade)
     GVECRealisation    GVECRealisation[]
     GVECFinCycle       GVECFinCycle[]
 }
@@ -34,7 +36,7 @@ model GVECRealisation {
     nb_octroye           Int
     total_caisse_epargne Float
     id_gvec_cycle        Int
-    gvec_cycle           GVECCycle @relation(fields: [id_gvec_cycle], references: [id])
+    gvec_cycle           GVECCycle @relation(fields: [id_gvec_cycle], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model GVECFinCycle {
@@ -47,7 +49,7 @@ model GVECFinCycle {
     montant_total   Float
     Producteur      Producteur   @relation(fields: [id_producteur], references: [id])
     id_gvec_cycle   Int
-    gvec_cycle      GVECCycle    @relation(fields: [id_gvec_cycle], references: [id])
+    gvec_cycle      GVECCycle    @relation(fields: [id_gvec_cycle], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
     @@unique([id_producteur, id_gvec_cycle])
 }
